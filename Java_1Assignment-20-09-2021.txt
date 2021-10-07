@@ -1,0 +1,197 @@
+
+1)To find whether given year is leap year or not.package com.torryharris;
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+	//To find whether given year is leap year or not.
+        Scanner sc = new Scanner(System.in);
+        System.out.println("enter the year");
+        int year = sc.nextInt();
+        int leap = year % 4;
+        if(leap == 0)
+            System.out.println(year+" is a leap year");
+        else
+            System.out.println(year+" is not a leap year");
+    }
+}
+
+output:
+enter the year
+1997
+1997 is not a leap year
+
+Process finished with exit code 0
+--------------------------------------------------------------------------------
+2)To find the Armstrong number.
+package com.torryharris;
+
+import java.util.Scanner;
+import java.lang.Math;
+public class Main {
+    public static void main(String[] args) {
+
+        //int number = 153;
+        int number = 12;
+
+        int sum = 0, temp = number;
+        while(temp != 0) {
+            int digit = temp % 10;
+            temp = temp / 10;
+            sum += (digit * digit * digit);
+        }
+
+        if(sum == number) {
+            System.out.println(number + " is a Armstrong number");
+        } else {
+            System.out.println(number + " is not a Armstrong number");
+        }
+    }
+
+
+
+
+
+output:
+153 is a Armstrong number
+
+12 is not a Armstrong number
+---------------------------------------------------------------------------------
+
+3)To find the perfect number.
+package com.torryharris;
+
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+                
+
+                long n, sum = 0;
+                Scanner sc = new Scanner(System.in);
+                System.out.println("Enter the number");
+                n = sc.nextLong();
+                int i = 1;
+                while (i <= n / 2) {
+                    if (n % i == 0) {
+                        sum = sum + i;
+
+                    }
+                    i++;
+
+                }
+                if (sum == n) {
+
+                    System.out.println(n + "is a perfect number");
+                } else
+                    System.out.println(n + "is not perfect number");
+
+    }
+
+
+}
+
+output:
+Enter the number
+
+6
+6is a perfect number
+
+Process finished with exit code 0
+---------------------------------------------------------------------------------
+4)Multiplication table:
+package com.torryharris;
+
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) { 
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter number:");
+        int n=scanner.nextInt();
+        for(int i=1; i <= 10; i++)
+        {
+            System.out.println(n+" * "+i+" = "+n*i);
+        }
+    }
+}
+
+output:
+Enter number:4
+4 * 1 = 4
+4 * 2 = 8
+4 * 3 = 12
+4 * 4 = 16
+4 * 5 = 20
+4 * 6 = 24
+4 * 7 = 28
+4 * 8 = 32
+4 * 9 = 36
+4 * 10 = 40
+---------------------------------------------------------------------------------
+5)LCM and HCF of 2 numbers.
+package com.torryharris;
+
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {        
+
+        int a, b,x,y,t,gcd ,lcm;
+        Scanner sc= new Scanner(System.in);
+        System.out.println("enter the integers\n");
+        x= sc.nextInt();
+        y= sc.nextInt();
+        a = x;
+        b= y;
+        while(b!=0)
+        {
+            t=b;
+            b=a%b;
+            a =t;
+
+        }
+        gcd=a;
+        lcm = (x*y)/gcd;
+        System.out.println("gcd of "+x+" and "+y+ "= "+gcd);
+        System.out.println("lcm of "+x+" and "+y+ "= "+lcm);
+
+    }
+}
+
+output:
+enter the integers
+
+10
+20
+gcd of 10 and 20= 10
+lcm of 10 and 20= 20
+
+Process finished with exit code 0
+---------------------------------------------------------------------------------
+6)largest of 3 numbers using nested ternary operator.
+package com.torryharris;
+
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("finding the largest of three 3 numbers");
+        System.out.println(" enter three numbers");
+        int n1 = sc.nextInt();
+        double n2 = sc.nextDouble();
+        long n3 = sc.nextLong();
+        double largest = (n1>n2)?((n1>n3)?n1:n3):((n2>n3)?n2:n3);
+        System.out.println(largest+" is the large number");
+
+    }
+}
+
+output:
+finding the largest of three 3 numbers
+ enter three numbers
+23
+32
+43
+43.0 is the large number
+
+Process finished with exit code 0
