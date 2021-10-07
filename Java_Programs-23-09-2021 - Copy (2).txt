@@ -1,0 +1,672 @@
+//Bank project.
+
+//Account class
+package com.torryharris.accountpack;
+
+import java.util.Random;
+
+public class Account {
+
+    private static long count;
+    private final long accNo;
+    private String accType;
+    private double balance;
+
+    static{
+        count=0;
+    }
+
+    public static long getCount()
+    {
+        //return(++count);
+        // to create random accNo
+        Random rand = new Random();
+        count = rand.nextInt(1000)+2000;
+        return count;
+    }
+
+    public Account(String accType, double balance) {
+        this.accNo=getCount();
+        this.accType = accType;
+        this.balance = balance;
+    }
+
+
+    public double deposit(double amount)
+    {
+        balance+=amount;
+        return amount;
+    }
+
+    public double withdraw(double amount)
+    {
+        balance-=amount;
+        return amount;
+    }
+
+    public double getBalance(){
+        return balance;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "accNo=" + accNo +
+                ", accType='" + accType + '\'' +
+                ", balance=" + balance +
+                '}';
+    }
+}
+
+
+//Main class
+package com.torryharris.bankpack;
+
+import com.torryharris.accountpack.Account;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Account account1 = new Account("Saving",5000);
+        System.out.println(account1);
+        System.out.println("Amount deposited :"+account1.deposit(6000));
+        System.out.println("current account state: \n"+account1);
+
+        System.out.println("Amount withdrawn :"+account1.withdraw(1000));
+        System.out.println(account1);
+
+        System.out.println(("---------------------------"));
+        Account account2 = new Account("Recurring",5000);
+        System.out.println("current account status :"+account2);
+
+    }
+}
+
+
+output:
+Account{accNo=2443, accType='Saving', balance=5000.0}
+Amount deposited :6000.0
+current account state: 
+Account{accNo=2443, accType='Saving', balance=11000.0}
+Amount withdrawn :1000.0
+Account{accNo=2443, accType='Saving', balance=10000.0}
+
+current account status :Account{accNo=2712, accType='Recurring', balance=5000.0}
+
+Process finished with exit code 0
+
+---------------------------------------------------------------------------------
+//dafault variable and default package friendly demo
+// if we does not give any access specifier to count then,
+   it will take it as public to all classes in the same package and private to all classes outside the package.
+// As Main class is in bankpack and Account Class is in accountpack if we try to use the count in bankpack then it will give the following error,
+  'count' is not public in 'com.torryharris.accountpack.Account'. Cannot be accessed from outside package
+// So here we create a bank1 class in Account pack and try to access default variable count.
+
+// creating bank1 class in Account pack
+
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+//Inheritance Demo
+// Employee(parent class), Manager(child class),Programmer(child class),Tax(child class) are created in emppack.
+// Main class is in mainpack
+
+//creating Employee(parent class)
+package com.torryharris.emppack;
+
+public class Employee {
+    protected int empId;
+    protected String empName;
+    protected int sal;
+
+    public Employee(int empId, String empName, int sal) {
+        this.empId = empId;
+        this.empName = empName;
+        this.sal = sal;
+    }
+
+    public String getDetails()
+    {
+        return (empId+"  "+empName+"  "+sal);
+    }
+
+    public int getSal() {
+        return sal;
+    }
+
+
+// Manager Class
+package com.torryharris.emppack;
+
+public class Manager extends Employee{
+
+    private String deptName;
+    private int empcount;
+
+    public Manager(int empId, String empName, int sal, String deptName, int empcount) {
+        super(empId, empName, sal);  // Constructor chaining, base class constructor is evoked
+                                    // within the derived class constructor
+                                    // using super() method
+        this.deptName=deptName;
+        this.empcount=empcount;
+    }
+
+    public String getDetails()  //override the function from the main class
+    {
+        return(super.getDetails()+"  "+deptName+"  "+empcount);
+    }
+
+    public String  getDeptname() {
+        return deptName;
+    }
+}
+
+// Programmer Class
+package com.torryharris.emppack;
+
+public class Programmer extends Employee {
+
+    private int noOfProjects;
+    private String skillSet;
+
+    public Programmer(int empId, String empName, int sal,int noOfProjects,String skillSet ) {
+        super(empId, empName, sal);
+        this.noOfProjects=noOfProjects;
+        this.skillSet=skillSet;
+    }
+
+    public String getDetails() {
+        return super.getDetails() + "  " + noOfProjects + "  " + skillSet;
+    }
+
+    public String getSkillSet() {
+        return skillSet;
+    }
+}
+
+
+//Main class (Accessing the Employee Class by Manager Class and Programmer Class)
+
+package com.torryharris.mainpack;
+
+import com.torryharris.emppack.Employee;
+import com.torryharris.emppack.Manager;
+import com.torryharris.emppack.Programmer;
+
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Employee employee1 = new Employee(100,"Hari",10000);
+        System.out.println(employee1.getDetails());
+
+        Manager m1 = new Manager(200,"Krishan",40000,"HR",5);
+        System.out.println(m1.getDetails());
+
+        Programmer p1 = new Programmer(300,"Dilip",30000,3,"Java");
+        System.out.println(p1.getDetails());
+   }
+}
+
+output:
+100  Hari  10000
+200  Krishan  40000  HR  5
+300  Dilip  30000  3  Java
+--------------------------------------------------------------------------------
+// Main Class 
+
+//since the instance created is of Manager Class and getDetails() is overridden method
+// getDetails of Manager class is executed
+//Dynamic polymorphism : which object is created its overriden methods work.
+
+package com.torryharris.mainpack;
+
+import com.torryharris.emppack.Employee;
+import com.torryharris.emppack.Manager;
+
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        //Manager instance upcasted...
+        Employee e1 = new Manager(201,"Ram",40000,"IT",5);
+        System.out.println(e1.getDetails());
+
+  }
+}
+
+output:
+201  Ram  40000  IT  5
+---------------------------------------------------------------------------------
+//Main Class
+// since e1 is the reference of Employee class : what all methods it can access?
+//this is known as down casting'
+
+package com.torryharris.mainpack;
+
+import com.torryharris.emppack.Employee;
+import com.torryharris.emppack.Manager;
+
+
+public class Main {
+
+    public static void main(String[] args) {
+	Employee e1 = new Manager(201,"Ram",40000,"IT",5);
+        System.out.println(e1.getDetails());
+	Manager m2 = (Manager)e1;
+        System.out.println("works for :"+m2.getDeptname());
+ }
+}
+
+output:
+201  Ram  40000  IT  5
+works for :IT
+---------------------------------------------------------------------------------
+//Main class
+//Utility of Upcasting
+
+package com.torryharris.mainpack;
+
+import com.torryharris.emppack.Employee;
+import com.torryharris.emppack.Manager;
+import com.torryharris.emppack.Programmer;
+import com.torryharris.taxpack.Tax;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+ Employee[] emparr = new Employee[4];
+        emparr[0] = new Employee(100,"Rounak",20000);
+        emparr[1] = new Manager(200,"Ankit",40000,"IT",10);
+        emparr[2] = new Programmer(300,"Smriti",30000,3,"Js");
+        emparr[3] = new Programmer(301,"Manoj",30000,2,"Java");
+
+
+        // Invoking getdetails() by the Manager object is a virtual method invoccation
+        // because of the concept of dynamic polymorphism
+        System.out.println("Printing the details of employees");
+        for (Employee e:emparr)
+        {
+            System.out.println(e.getDetails()+" tax paid :"+ Tax.calc_Tax(e));  // static method is being called by Class name.
+        }
+
+
+
+    }
+}
+
+output:
+Printing the details of employees
+100  Rounak  20000 tax paid :0.0
+200  Ankit  40000  IT  10 tax paid :8000.0
+300  Smriti  30000  3  Js tax paid :3000.0
+301  Manoj  30000  2  Java tax paid :3000.0
+
+Process finished with exit code 0
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+// Abstract Class
+//Employee Class in emppack
+package com.torryharris.emppack;
+
+// an abstract class cannot instantiate or cannot create objects.
+public abstract class Employee {
+    protected int empId;
+    protected String empName;
+    protected int sal;
+
+    public Employee(int empId, String empName, int sal) {
+        this.empId = empId;
+        this.empName = empName;
+        this.sal = sal;
+    }
+
+    public String getDetails()
+    {
+        return (empId+"  "+empName+"  "+sal);
+    }
+
+    public abstract double calcNetSal(); // abstract method : which will not have any body only declaration.
+    // If any method is a abstract method in class, the class turns itself to abstract class.
+
+
+    public int getSal() {
+        return sal;
+    }
+}
+
+
+//Programmer Class in emppack
+package com.torryharris.emppack;
+
+public class Programmer extends Employee {
+
+    private int noOfProjects;
+    private String skillSet;
+
+    public Programmer(int empId, String empName, int sal,int noOfProjects,String skillSet ) {
+        super(empId, empName, sal);
+        this.noOfProjects=noOfProjects;
+        this.skillSet=skillSet;
+    }
+
+    @Override
+    public String toString() {
+        return "Programmer{" +
+                "empId=" + empId +
+                ", empName='" + empName + '\'' +
+                ", sal=" + sal +
+                ", noOfProjects=" + noOfProjects +
+                ", skillSet='" + skillSet + '\'' +
+                '}';
+    }
+
+    @Override // annotations are piece of information passed to compiler.
+    public double calcNetSal() {
+        return 15000;
+    }
+
+    public int getNoOfProjects() { return noOfProjects; }
+    public String getSkillSet() {
+        return skillSet;
+    }
+}
+
+
+//Manager Class in emppack
+package com.torryharris.emppack;
+
+public class Manager extends Employee{
+
+    private String deptName;
+    private int empcount;
+
+
+
+    public Manager(int empId, String empName, int sal, String deptName, int empcount) {
+        super(empId, empName, sal);  // Constructor chaining, base class constructor is evoked
+                                    // within the derived class constructor
+                                    // using super() method
+        this.deptName=deptName;
+        this.empcount=empcount;
+    }
+
+    @Override
+    public String toString() {
+        return "Manager{" +
+                "empId=" + empId +
+                ", empName='" + empName + '\'' +
+                ", sal=" + sal +
+                ", deptName='" + deptName + '\'' +
+                ", empcount=" + empcount +
+                '}';
+    }
+
+    @Override
+    public double calcNetSal() {
+        return 20000;
+    }
+
+    public String  getDeptname() {
+        return deptName;
+    }
+}
+
+
+
+
+
+
+
+
+//Main class
+package com.torryharris.mainpack;
+
+import com.torryharris.emppack.Employee;
+import com.torryharris.emppack.Manager;
+import com.torryharris.emppack.Programmer;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+       // Employee e = new Employee(100,"sagr",30000);
+        Manager m1 = new Manager(200,"Krishan",40000,"HR",5);
+        System.out.println(m1+" Net Salary  "+m1.calcNetSal());
+
+        Programmer p1 = new Programmer(300,"Dilip",30000,3,"Java");
+        System.out.println(p1+" Net Salary "+p1.calcNetSal());
+
+        Employee[] emparr = new Employee[4];
+        emparr[0] = new Manager(100,"Rounak",20000,"finance",5);
+        emparr[1] = new Manager(200,"Ankit",40000,"IT",10);
+        emparr[2] = new Programmer(300,"Smriti",30000,3,"Js");
+        emparr[3] = new Programmer(301,"Manoj",30000,2,"Java");
+        System.out.println("Printing the details of employees");
+        for (Employee e:emparr)
+        {
+            System.out.println(e+ " Net salary: "+e.calcNetSal());  // static method is being called by Class name.
+        }
+    }
+}
+
+output:
+Manager{empId=200, empName='Krishan', sal=40000, deptName='HR', empcount=5} Net Salary  20000.0
+Programmer{empId=300, empName='Dilip', sal=30000, noOfProjects=3, skillSet='Java'} Net Salary 15000.0
+Printing the details of employees
+Manager{empId=100, empName='Rounak', sal=20000, deptName='finance', empcount=5} Net salary: 20000.0
+Manager{empId=200, empName='Ankit', sal=40000, deptName='IT', empcount=10} Net salary: 20000.0
+Programmer{empId=300, empName='Smriti', sal=30000, noOfProjects=3, skillSet='Js'} Net salary: 15000.0
+Programmer{empId=301, empName='Manoj', sal=30000, noOfProjects=2, skillSet='Java'} Net salary: 15000.0
+
+Process finished with exit code 0
+
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+
+//Interface
+//creating Interfaces named Interface1 and Interface2 
+
+//Interface1
+package com.torryharris.pack1;
+
+public interface Interface1 {
+
+    void m1();  //public abstract  method.
+    void m2();
+    void m3();
+
+}
+
+//Interface2
+package com.torryharris.pack1;
+
+public interface Interface2 {
+    int count=10; // by default variable is public static final variable
+    public void m4();  // public abstract  method.
+}
+
+//Class1
+package com.torryharris.pack1;
+
+public class Class1  implements Interface1,Interface2{
+
+    @Override
+    public void m1() {
+        System.out.println(" In m1");
+
+    }
+
+    @Override
+    public void m2() {
+        System.out.println(" In m2");
+
+    }
+
+    @Override
+    public void m3() {
+        System.out.println(" In m3");
+
+    }
+
+
+    @Override
+    public void m4() {
+        System.out.println(" In m4");
+        System.out.println("Count Value"+Interface2.count);
+
+    }
+}
+
+// main class
+package com.torryharris.mainpack;
+
+import com.torryharris.pack1.Class1;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Class1 ob = new Class1();
+
+        ob.m1();
+        ob.m4();
+
+
+    }
+}
+
+output:
+In m1
+ In m4
+Count Value10
+
+Process finished with exit code 0
+---------------------------------------------------------------------------------
+//Interface and Abstract
+
+//Automobile Interface
+package com.torryharris.vpack;
+
+public interface Automobile {
+
+    String start();
+    int increSpeed(int n);
+    String stop();
+}
+
+//Vehicle Class
+package com.torryharris.vpack;
+
+public abstract class Vehicle implements  Automobile{
+
+    protected int regNo;
+    protected String model;
+    protected int currSpeed;
+
+
+    public Vehicle(int regNo, String model, int currSpeed) {
+        this.regNo = regNo;
+        this.model = model;
+        this.currSpeed = currSpeed;
+    }
+
+    @Override
+    public String start() {
+        return "Vehicle started";
+    }
+
+    @Override
+    public abstract int increSpeed(int n);
+
+    @Override
+    public String stop() {
+        return "Vehicle stopped....";
+    }
+
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "regNo=" + regNo +
+                ", model='" + model + '\'' +
+                ", currSpeed=" + currSpeed +
+                '}';
+    }
+}
+
+//Car class
+package com.torryharris.vpack;
+
+public class Car extends Vehicle{
+    private int maxSpeed;
+    private String type;
+
+    public Car(int regNo, String model, int currSpeed, int maxSpeed, String type) {
+        super(regNo, model, currSpeed); // constructor chaining
+        this.maxSpeed=maxSpeed;
+        this.type=type;
+    }
+
+
+    @Override
+    public int increSpeed(int n) {
+        if (currSpeed+n <maxSpeed)
+            currSpeed +=n;
+        else
+            currSpeed=-1;
+            return (currSpeed);
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "maxSpeed=" + maxSpeed +
+                ", type='" + type + '\'' +
+                ", regNo=" + regNo +
+                ", model='" + model + '\'' +
+                ", currSpeed=" + currSpeed +
+                '}';
+    }
+}
+
+
+//LongDrive main class
+package com.torryharris.mainpack;
+
+import com.torryharris.vpack.Automobile;
+import com.torryharris.vpack.Car;
+
+public class LongDrive {
+
+    public static void main(String[] args) {
+
+
+
+        Automobile car1 = new Car(1927,"q3",40,120,"sedan");
+        System.out.println(car1.start());
+        int increvale=car1.increSpeed(40);
+
+
+        if (increvale==-1)
+        {
+            System.out.println("Alert!!!!  stop the car");
+        }
+        else
+            System.out.println("enjoy your ride");
+
+        System.out.println(car1.stop());
+
+
+    }
+}
+
+output:
+Vehicle started
+enjoy your ride
+Vehicle stopped....
+
+Process finished with exit code 0
+---------------------------------------------------------------------------------

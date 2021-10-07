@@ -1,0 +1,640 @@
+//lombok Demo
+
+//Customer Class using @getter @setter etc... directly
+import lombok.*;
+
+@Getter
+@AllArgsConstructor
+@Setter
+@ToString
+@NoArgsConstructor
+public class Customer {
+    @Getter
+    private int  custId;
+    private String custName;
+    @Getter
+    private int   balance;
+
+}
+
+//Person Class
+//using @Data 
+import lombok.Data;
+
+public @Data class Person {     //@Data will give all features of getters,setters,no arguments etc...
+    private int pId;
+    private String name;
+
+
+
+}
+
+
+//Main Class
+public class Main {
+
+    public static void main(String[] args)
+    {
+
+        Customer cust1 = new Customer(200,"desh",3000);
+        System.out.println(cust1);
+
+        Customer cust2 = new Customer();
+        cust2.setCustId(200);
+        cust2.setCustName("radha");
+        cust2.setBalance(4000);
+        System.out.println(cust2.getCustId()+"  "+cust2.getCustName()+"  "+cust2.getBalance());
+
+        Customer cust3 = new Customer(200,"vedha",5789);
+        System.out.println(cust3.getCustId()+"  "+cust3.getBalance());
+
+        Person person = new Person();
+        person.setName("sagar");
+        person.setPId(234);
+        System.out.println(person.getPId()+"  "+person.getName());
+    }
+}
+
+
+output:
+Customer(custId=200, custName=desh, balance=3000)
+200  radha  4000
+200  5789
+234  sagar
+
+---------------------------------------------------------------------------------
+//FileReadWriteCharacterFormatDemo
+//Main Class
+package com.torryharris.mainpack;
+
+import java.io.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        File file1 = new File("C:\\Users\\sagar_deshmukh\\Desktop\\thfile1.txt");
+        File file2 = new File("C:\\Users\\sagar_deshmukh\\Desktop\\thfile2.txt");   // if the file4 is not present in filemanager the filewriter cretes the file4 file and writes into it.
+
+
+        try(FileReader fr = new FileReader(file1);
+            BufferedReader br = new BufferedReader(fr);
+            FileWriter fw = new FileWriter(file2);
+           /* FileWriter fw = new FileWriter(file2,true);*/  // used to add the contents from file1 to file2.
+            BufferedWriter bw = new BufferedWriter(fw);)
+        {
+            String str;
+            while((str=br.readLine())!=null)    // Endoffile(EOF) condition
+            {
+                System.out.println(str);
+                bw.write(str);
+                bw.newLine();
+            }
+            System.out.println("All data records entered successfully");
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+}
+
+output:
+Java is oop language
+abcdefghijklmnopqrstuvwxyz
+java is too fast
+
+---------------------------------------------------------------------------------
+//FileReadBytebyByteDemo
+//Main Class
+package com.torryharris.mainpack;
+
+import java.io.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        File file1 = new File("C:\\Users\\sagar_deshmukh\\Desktop\\thfile1.txt");
+        File file3 = new File("C:\\Users\\sagar_deshmukh\\Desktop\\thfile3.txt");
+
+        try(FileInputStream input = new FileInputStream(file1);
+        BufferedInputStream bis = new BufferedInputStream(input);
+            FileOutputStream output = new FileOutputStream(file3);
+            BufferedOutputStream bos = new BufferedOutputStream(output);) {
+
+            int c;
+            while((c=bis.read())!=-1)
+            {
+                bos.write(c);
+                System.out.print((char) c);  //converting byte c into character
+            }
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+output:
+Java is oop language
+abcdefghijklmnopqrstuvwxyz
+java is too fast
+
+---------------------------------------------------------------------------------
+//FileReadWriteByteArrayDemo
+//Main Class
+package com.torryharris.mainpack;
+
+import java.io.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        File file1 = new File("C:\\Users\\sagar_deshmukh\\Desktop\\thfile1.txt");
+        File file5 = new File("C:\\Users\\sagar_deshmukh\\Desktop\\thfile5.txt");
+
+        try(FileInputStream input = new FileInputStream(file1);
+            BufferedInputStream bis = new BufferedInputStream(input);
+            FileOutputStream output = new FileOutputStream(file5);
+            BufferedOutputStream bos = new BufferedOutputStream(output);) {
+
+            //to know the size of a file we use available method
+            byte[] buffer = new byte[input.available()];
+            bis.read(buffer);
+            bos.write(buffer);
+            for(byte b:buffer)
+            {
+                System.out.print((char)b);
+            }
+
+
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+}
+
+output:
+Java is oop language
+abcdefghijklmnopqrstuvwxyz
+java is too fast
+
+---------------------------------------------------------------------------------
+//Object Streams
+//File read and write object demo
+
+//Student class
+package spack;
+// if the class objects are going for permanent persistance we need to serialize this class
+// this concept in java is called serialization
+// it means kindly save the serial oeder of the member variables while storing and retrieving it from the file
+// Serializable is a  interface
+
+import java.io.Serializable;
+
+public class Student implements Serializable {
+    // Serializable interface has no methods
+    //
+
+    private int id;
+    private String name;
+    private int marks;
+
+    public Student(int id, String name, int marks) {
+        this.id = id;
+        this.name = name;
+        this.marks = marks;
+    }
+
+    @Override
+    public String toString() {
+        return "spack.Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", marks=" + marks +
+                '}';
+    }
+}
+
+
+//Main class
+package com.torryharris.mainpack;
+
+import spack.Student;
+
+import java.io.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        File file1 = new File("C:\\Users\\sagar_deshmukh\\Desktop\\student.txt");   //student.txt is the logical filename
+
+        try(
+            FileOutputStream output = new FileOutputStream(file1);
+            ObjectOutputStream out = new ObjectOutputStream(output);     //the contents of the file1 is encrypted
+            FileInputStream input = new FileInputStream(file1);
+            ObjectInputStream in = new ObjectInputStream(input);) {
+            Student student1 = new Student(100,"Raagu",80);
+            // writing the serialized object
+            out.writeObject(student1);
+            Student student2 = new Student(200,"maagu",90);
+            out.writeObject(student2);
+            System.out.println("Student records written in file1");
+
+            //Deserialization
+            // 1.No new object is created : No constructor will work
+            // 2.The Size of file(size of all the objects in the file) is got using available().
+            // 3. FileInputStream object will get you to total size of the file
+
+            while(input.available()>0)
+            {
+                Student student = (Student) in.readObject();
+                System.out.println(student);
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+output:
+Student records written in file1
+spack.Student{id=100, name='Raagu', marks=80}
+spack.Student{id=200, name='maagu', marks=90}
+
+---------------------------------------------------------------------------------
+//JDBC Demo1
+
+//pom.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.th.B84</groupId>
+    <artifactId>JdbcDemo1</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <dependencies>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.25</version>
+        </dependency>
+    </dependencies>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
+
+</project>
+
+
+
+
+
+//Main Class
+import java.sql.*;
+
+import java.sql.*;
+public class Main {
+
+
+
+        public static void main(String[] args) throws ClassNotFoundException, SQLException {
+            // Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hr","root","Hanuman@123");
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("select * from countries");
+            while (rs.next())
+            {
+                System.out.println(rs.getString(1)+"    "+rs.getString(2)+"   "+rs.getInt(3));
+            }
+            con.close();
+        }
+
+}
+
+output:
+AR    Argentina   2
+AU    Australia   3
+BE    Belgium   1
+BR    Brazil   2
+CA    Canada   2
+CH    Switzerland   1
+CN    China   3
+DE    Germany   1
+DK    Denmark   1
+EG    Egypt   4
+FR    France   1
+HK    HongKong   3
+IL    Israel   4
+IN    India   3
+IT    Italy   1
+JP    Japan   3
+KW    Kuwait   4
+MX    Mexico   2
+NG    Nigeria   4
+NL    Netherlands   1
+SG    Singapore   3
+UK    United Kingdom   1
+US    United States of America   2
+ZM    Zambia   4
+ZW    Zimbabwe   4
+
+Process finished with exit code 0
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+//Collection Book Store Demo
+
+//pom.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.th.B84</groupId>
+    <artifactId>CollectionBookStoreDemo</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>16</source>
+                    <target>16</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
+
+</project>
+
+
+//Book.java Class(Under model package)
+package model;
+
+public class Book {
+    private int bookId;
+    private String bookName;
+    private int bookPrice;
+
+    public Book(int bookId, String bookName, int bookPrice) {
+        this.bookId = bookId;
+        this.bookName = bookName;
+        this.bookPrice = bookPrice;
+    }
+
+    public int getBookId() {
+        return bookId;
+    }
+
+    public String getBookName() {
+        return bookName;
+    }
+
+    public int getBookPrice() {
+        return bookPrice;
+    }
+
+    public void setBookPrice(int bookPrice) {
+        this.bookPrice = bookPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "bookId=" + bookId +
+                ", bookName='" + bookName + '\'' +
+                ", bookPrice=" + bookPrice +
+                '}';
+    }
+}
+
+//BookOperarationsInterface (under bookop package)
+package bookop;
+
+import model.Book;
+
+import java.util.ArrayList;
+
+public interface BookOperations {
+
+   String addABook(Book book);
+   ArrayList<Book> getAllBooks();
+   Book getABook(int bookId);
+   String setBookPrice(int bookId,int ipPrice);
+}
+
+//BookOperationImpl Class (under bookop package)
+package bookop;
+
+import model.Book;
+
+import java.util.ArrayList;
+
+public class BookOperationImpl implements BookOperations{
+   private ArrayList<Book> blist = new ArrayList<Book>();
+
+
+
+
+    @Override
+    public String addABook(Book book) {
+        blist.add(book);
+        return("Book added Successfully");
+    }
+
+    @Override
+    public ArrayList<Book> getAllBooks() {
+        return blist;
+    }
+
+    @Override
+    public Book getABook(int bookId) {
+        for (Book book:blist)
+        {
+            if(book.getBookId()==bookId)
+                return book;
+        }
+        return null;
+    }
+
+    @Override
+    public String setBookPrice(int bookId, int ipPrice) {
+       Book book = getABook(bookId);
+       book.setBookPrice(ipPrice);
+       return("Book price updated successsfullly");
+   }
+}
+
+
+//BookStoreMain Class (under mainUI package)
+package mainUIpack;
+
+import bookop.BookOperationImpl;
+import bookop.BookOperations;
+import model.Book;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import static java.lang.System.exit;
+
+public class BookStoreMain {
+
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        BookOperationImpl boi = new BookOperationImpl();
+
+        while(true)
+        {
+            System.out.println("1. Add a Book");
+            System.out.println("2. list all the  Book");
+            System.out.println("3. get a Book");
+            System.out.println("4. update a Book price");
+            System.out.println("5. Exit");
+
+            System.out.println("Enter your choice");
+            int choice = sc.nextInt();
+
+            switch(choice)
+            {
+                case 1:
+                {
+                    System.out.println("enter the details of the book");
+                    int bookId = sc.nextInt();
+                    String bookName = sc.next();
+                    int bookPrice = sc.nextInt();
+                    Book book = new Book(bookId,bookName,bookPrice);
+                    System.out.println(boi.addABook(book));
+                    break;
+                }
+
+                case 2:
+                {
+                    ArrayList<Book> blist = boi.getAllBooks();
+                    for(Book book:blist)
+                    {
+                        System.out.println(book);
+                    }
+                    break;
+                }
+
+                case 3:
+                {
+                    System.out.println("enter the book id to be search");
+                    int bookId = sc.nextInt();
+                    Book book = boi.getABook(bookId);
+                    if(book != null)
+                        System.out.println(book);
+                    else
+                        System.out.println("Book does not found in the store");
+                    break;
+                }
+                case 4:
+                {
+                    System.out.println("enter the book id");
+                    int bookId = sc.nextInt();
+                    System.out.println("enter the updated price of the book");
+                    int upPrice = sc.nextInt();
+                    System.out.println(boi.setBookPrice(bookId,upPrice));
+                    break;
+                }
+                default:
+                    sc.close();
+                    System.out.println("bye Bye");
+                    System.exit(0);
+            }
+
+        }
+    }
+}
+
+
+
+output:
+1. Add a Book
+2. list all the  Book
+3. get a Book
+4. update a Book price
+5. Exit
+Enter your choice
+1
+enter the details of the book
+23
+java
+300
+Book added Successfully
+1. Add a Book
+2. list all the  Book
+3. get a Book
+4. update a Book price
+5. Exit
+Enter your choice
+2
+Book{bookId=23, bookName='java', bookPrice=300}
+1. Add a Book
+2. list all the  Book
+3. get a Book
+4. update a Book price
+5. Exit
+Enter your choice
+2
+Book{bookId=23, bookName='java', bookPrice=300}
+1. Add a Book
+2. list all the  Book
+3. get a Book
+4. update a Book price
+5. Exit
+Enter your choice
+3
+enter the book id to be search
+23
+Book{bookId=23, bookName='java', bookPrice=300}
+1. Add a Book
+2. list all the  Book
+3. get a Book
+4. update a Book price
+5. Exit
+Enter your choice
+4
+enter the book id
+23
+enter the updated price of the book
+400
+Book price updated successsfullly
+1. Add a Book
+2. list all the  Book
+3. get a Book
+4. update a Book price
+5. Exit
+Enter your choice
+5
+bye Bye
+

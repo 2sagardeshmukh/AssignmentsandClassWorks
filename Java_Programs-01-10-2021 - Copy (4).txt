@@ -1,0 +1,113 @@
+// String Operations
+
+package com.torryharris;
+
+import java.util.Locale;
+import java.util.StringTokenizer;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+
+       String str1 = "Java World";
+       String str2 = "Java World";
+       String str3 = new String("Java World");
+//
+//
+//        // equals() method id already to compare the contents two strings
+//        System.out.println(str1.equals(str2));
+//
+//        // the references we use == operator
+           System.out.println(str1==str2);
+//
+            System.out.println(str1.equals(str3));
+             System.out.println(str1==str3);
+//
+//
+//        // Strings are immutable
+         String str10 = "Welcome";
+       System.out.println(str10.length());
+       System.out.println(str10.charAt(0));
+       System.out.println(str10.toLowerCase());
+       System.out.println(str10);
+        System.out.println(str10.toUpperCase());
+        System.out.println(str10);
+       System.out.println("------------------------------");
+
+        String str11 = str10.toUpperCase();
+        System.out.println(str10);
+        System.out.println(str11);
+
+        String str13 = "Java World";
+        String str12 = str10+str13.substring(1,4);
+        // lowerlimit : indexvalue 1  upperlimit 4
+        // extraction for substring is 1 less than the upper limit
+        System.out.println(str12);
+
+        System.out.println(str10.replace('e','o'));
+        System.out.println(str10.replaceAll("We","Shell"));
+
+        System.out.println("------------------------------------");
+
+        int i = 10;
+        String istr = String.valueOf(i);
+        System.out.println(istr);
+
+        int res = Integer.parseInt("100");
+        System.out.println("------------------------------------");
+
+
+        //split()
+        // blank space is also be used as delimiter
+        String str14 = "Welcome all to Torry Harris Business Solution";
+        String[] words = str14.split(" ");
+        for (String s:words)
+        {
+            System.out.println(s);
+        }
+        System.out.println("----------------------------------------");
+
+        StringTokenizer st = new StringTokenizer("https://10.3306://mysql://book",":");
+        while (st.hasMoreTokens())
+        {
+            System.out.println(st.nextToken());
+        }
+
+
+
+    }
+}
+
+
+output:
+true
+true
+false
+7
+W
+welcome
+Welcome
+WELCOME
+Welcome
+------------------------------
+Welcome
+WELCOME
+Welcomeava
+Wolcomo
+Shelllcome
+------------------------------------
+10
+------------------------------------
+Welcome
+all
+to
+Torry
+Harris
+Business
+Solution
+----------------------------------------
+https
+//10.3306
+//mysql
+//book

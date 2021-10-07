@@ -1,0 +1,312 @@
+package com.torryharris;
+
+public class Main {
+
+    public static void main(String[] args) {
+        //program to add two numbers
+        int n1=10,n2=20;
+    int sum = n1+n2;
+        System.out.println("sum is "+sum);
+    }
+}
+
+output:
+sum is 30
+
+Process finished with exit code 0
+--------------------------------------------------------------------------------
+
+package com.torryharris;
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        //program to add two numbers taking input from console
+        Scanner sc = new Scanner(System.in);
+        System.out.println("enter the two numbers");
+        int n1 = sc.nextInt();
+        int n2 = sc.nextInt();
+        int sum = n1+n2;
+        System.out.println("sum is "+sum);
+    }
+}
+
+output:
+enter the two numbers
+10
+20
+sum is 30
+
+Process finished with exit code 0
+---------------------------------------------------------------------------------
+  //program to find entered number is even or odd.
+        Scanner sc =new Scanner(System.in);
+        System.out.println("enter the number");
+        int num = sc.nextInt();
+        if ( num % 2 == 0)
+            System.out.println(num+"  is even");
+        else
+            System.out.println(num +" is odd");
+
+output:
+enter the number
+236
+236  is even
+
+Process finished with exit code 0
+---------------------------------------------------------------------------------
+ //program to find largest of three numbers.
+        Scanner sc =new Scanner(System.in);
+        System.out.println(" enter three numbers");
+        int n1 = sc.nextInt();
+        double n2 = sc.nextDouble();
+        long n3 = sc.nextLong();
+        double lar1 = (n1>n2)?n1:n2;
+        double lar2= (lar1>n3)?lar1:n3;
+        System.out.println(lar2+" is the large number");
+
+output:
+enter three numbers
+10
+20
+30
+30.0 is the large number
+
+Process finished with exit code 0
+---------------------------------------------------------------------------------
+ //type casting...
+        float f1 = 2.34374F;
+        double d1 = f1;
+        float f2 = (float)d1;
+        int i1 = (int)d1;
+        System.out.println(+f1);
+        System.out.println(+d1);
+        System.out.println(+d1);
+        System.out.println(+i1);
+        System.out.printf("formatted d1 : %.2f",d1);
+output:
+2.34374
+2.3437399864196777
+2.3437399864196777
+2
+formatted d1 : 2.34
+Process finished with exit code 0
+---------------------------------------------------------------------------------
+ //pre increment and post increment.
+        int i=10;
+        int ans = ++i;
+        System.out.println(+ans);
+        int j=15;
+        int ans1=j++;
+        System.out.println(+ans1);
+output:
+11
+15
+---------------------------------------------------------------------------------
+//program to reverse the number.
+package com.torryharris;
+
+import java.util.Scanner;
+
+public class Main {
+Scanner sc = new Scanner(System.in);
+        System.out.println("enter the number to be reversed");
+        int num = sc.nextInt();
+
+        int revnum = reverseNum(num);
+        System.out.println("reverse of " + num + "is :" + revnum);
+    }
+
+    public static int reverseNum(int n) {
+        int rem = 0, revnum = 0;
+        while (n != 0) {
+            rem = n % 10;
+            revnum = revnum * 10 + rem;
+            n = n / 10;
+        }
+        return revnum;
+    }
+}
+
+output:
+enter the number to be reversed
+1234
+reverse of 1234is :4321
+
+Process finished with exit code 0
+---------------------------------------------------------------------------------
+//program to find the entered number is prime or not.
+package com.torryharris;
+
+import java.util.Scanner;
+
+public class Main {
+Scanner sc = new Scanner(System.in);
+System.out.println("enter a integer value");
+        int num = sc.nextInt();
+        if (isprime(num))
+            System.out.println("number is prime");
+        else
+            System.out.println("the number is not prime");
+    }
+    public static boolean isprime(int num) {
+        boolean flag = true;
+        for (int i = 2; i <= (num / 2); i++) {
+            if (num % i == 0) {
+                flag = false;
+                break;
+            }
+        }
+
+output:
+enter a integer value
+19
+number is prime
+
+Process finished with exit code 0
+--------------------------------------------------------------------------------
+//factorail of a number.
+package com.torryharris;
+
+import java.util.Scanner;
+
+public class Main {
+System.out.println("enter a integer value");
+    Scanner sc = new Scanner(System.in);
+    int num = sc.nextInt();
+    long fact = factorial(num);
+        System.out.println("factorail of "+num+" is :"+fact);
+}
+
+    public static long factorial(int num) {
+        long f = 1;
+        for (int i = 1; i <= num; i++) {
+            f *= i;
+
+        }
+            return f;
+
+    }
+output:
+enter a integer value
+5
+factorail of 5 is :120
+
+Process finished with exit code 0
+---------------------------------------------------------------------------------
+//to find number of days in given month number.
+package com.torryharris;
+
+import java.util.Scanner;
+
+public class Main {
+        System.out.println("enter the month number");
+        Scanner sc = new Scanner(System.in);
+        int mno = sc.nextInt();
+        String days = tofinddays(mno);
+        System.out.println("the month no. " + mno + " " + days);
+    }
+
+
+    public static String tofinddays(int mno) {
+        String days = "";
+        switch (mno) {
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                days = " has 31 days";
+                break;
+            case 2:
+                days = "has 28 or 29 days";
+                break;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                days = "has 30 days";
+            default:
+                days = "invalid month no.";
+
+        }
+        return days;
+
+    }
+output:
+enter the month number
+2
+the month no. 2 has 28 or 29 days
+
+Process finished with exit code 0
+---------------------------------------------------------------------------------
+//printing the elements in array.
+package com.torryharris;
+
+import java.util.Scanner;
+
+public class Main { 
+int[] arr = {10, 20, 30, 40, 50};
+        System.out.println(" printing the elements in the array");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+}
+output:
+printing the elements in the array
+10 20 30 40 50 
+Process finished with exit code 0
+---------------------------------------------------------------------------------
+//giving the array from the console and calculating the array elements.
+package com.torryharris;
+
+import java.util.Scanner;
+
+public class Main {        
+ Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the number of elements");
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        int sum = 0;
+        System.out.println("enter the array elements:");
+        for (int i=0;i<arr.length;i++)
+        {
+            arr[i] = sc.nextInt();
+            sum+=arr[i];
+        }
+        System.out.println("printing the elements in the array");
+        for (int j=0; j<arr.length; j++)
+        {
+            System.out.println(arr[j]+"  ");
+        }
+        System.out.println();
+        System.out.println("the sum of elements in array:"+sum );
+        sc.close();
+
+    }
+}
+
+output:
+Enter the number of elements
+5
+enter the array elements:
+10
+20
+30
+40
+50
+printing the elements in the array
+10  
+20  
+30  
+40  
+50  
+
+the sum of elements in array:150
+
+Process finished with exit code 0

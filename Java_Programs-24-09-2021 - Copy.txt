@@ -1,0 +1,218 @@
+#Exception Handling
+
+#Checked Exceptions:
+
+// if we n1=10 and n2=0 then we will get the Arithmetic exception
+package com.torryharris.mainpack;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+       int result=0;
+
+       int n1 = Integer.parseInt(args[0]); // command line arguments
+       int n2 = Integer.parseInt(args[1]);
+       result = n1/n2;
+        System.out.println(result);
+
+        System.out.println("bye bye tata");
+
+
+
+    }
+}
+
+//After running the above program with n1=10 and n2=0 we will get following exception.
+  Exception in thread "main" java.lang.ArithmeticException: / by zero
+---------------------------------------------------------------------------------
+//2 more examples for exception
+---------------------------------------------------------------------------------
+# Handling the exception with try and catch block.
+
+package com.torryharris.mainpack;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+       int result=0;
+
+       try {  //Aanticipated block
+           int n1 = Integer.parseInt(args[0]); // command line arguments
+           int n2 = Integer.parseInt(args[1]);
+           result = n1 / n2;
+       }catch(ArithmeticException e)
+       {
+           System.out.println("denominator is Zero  "+e.getMessage());
+       }
+        System.out.println(result);
+
+        System.out.println("bye bye tata");
+
+
+
+    }
+}
+
+output:
+denominator is Zero  / by zero
+0
+bye bye tata
+
+Process finished with exit code 0
+---------------------------------------------------------------------------------
+#Exception handling with single try block with multiple catch blocks
+package com.torryharris.mainpack;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+       int result=0;
+
+       try {  //Aanticipated block
+           int n1 = Integer.parseInt(args[0]); // command line arguments
+           int n2 = Integer.parseInt(args[1]);
+           result = n1 / n2;
+       }catch(ArithmeticException e)
+       {
+           System.out.println("denominator is Zero  "+e.getMessage());
+       }
+       catch(NumberFormatException e)
+       {
+           System.out.println("Invalid inputs  "+e.getMessage());
+       }
+       catch(ArrayIndexOutOfBoundsException e)
+       {
+           System.out.println("Insufficient inputs  "+e.getMessage());
+       }
+       finally{   // whether or not exception encountered finally block will be executed.
+           System.out.println(result);
+       }
+       
+
+        System.out.println("bye bye tata");
+
+
+
+    }
+}
+output: //we gave n1=10 and n2=2;
+5			// as we can see here whether the exception encountered or not finally block is executed.
+bye bye tata
+
+Process finished with exit code 0
+---------------------------------------------------------------------------------
+#Exception handling with read input method
+//All 3 methods are included
+
+    
+
+package com.torryharris.exceptionpack;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+public class ReadInput {​​​​​​
+
+    // try with resources ------> try with auto close option
+public static void readInput1()
+    {​​​​​​
+        try(InputStreamReader ir = new InputStreamReader(System.in);
+BufferedReader  br = new BufferedReader(ir);) {​​​​​​
+            System.out.println("Read two input values : ");
+String str1 = br.readLine();
+String str2 = br.readLine();
+            int result = Integer.parseInt(str1) / Integer.parseInt(str2);
+System.out.println(result);
+}​​​​​​
+        catch (ArithmeticException e) {​​​​​​
+            System.out.println("Denominator is zeo    " + e.getMessage());
+}​​​​​​ catch (NumberFormatException e) {​​​​​​
+            System.out.println("Invalid inputs...    " + e.getMessage());
+}​​​​​​
+        catch (IOException e) {​​​​​​
+            e.printStackTrace();
+}​​​​​​
+    }​​​​​​
+
+    public static void readInput2() throws IOException ,ArithmeticException,NumberFormatException{​​​​​​
+        InputStreamReader ir = new InputStreamReader(System.in);
+BufferedReader  br = new BufferedReader(ir);
+System.out.println("Read two input values : ");
+String str1 = br.readLine();
+String str2 = br.readLine();
+        int result = Integer.parseInt(str1) / Integer.parseInt(str2);
+System.out.println(result); 
+}​​​​​​
+
+
+// for a checked exception
+public static void readInput() {​​​​​​
+        InputStreamReader ir = null;
+BufferedReader br = null;
+String str1, str2;
+// InputStreamReader is pipelined with BufferedReader
+try {​​​​​​
+            ir = new InputStreamReader(System.in);  // will read one char at a time
+br = new BufferedReader(ir);  // br will be
+System.out.println("Read two input values : ");
+str1 = br.readLine();
+str2 = br.readLine();
+            int result = Integer.parseInt(str1) / Integer.parseInt(str2);
+System.out.println(result);
+}​​​​​​ catch (ArithmeticException e) {​​​​​​
+            System.out.println("Denominator is zeo    " + e.getMessage());
+}​​​​​​ catch (NumberFormatException e) {​​​​​​
+            System.out.println("Invalid inputs...    " + e.getMessage());
+}​​​​​​ catch (IOException e) {​​​​​​
+            System.out.println("Resource error...." + e.getMessage());
+// e.printStackTrace();
+}​​​​​​ finally {​​​​​​
+            try {​​​​​​
+                ir.close();
+br.close();
+}​​​​​​ catch (IOException e) {​​​​​​
+                e.printStackTrace();
+}​​​​​​
+        }​​​​​​
+
+    }​​​​​​
+
+}​​​​​​
+
+
+
+    
+//Main class
+package com.torryharris.mainpack;
+import com.torryharris.exceptionpack.ReadInput;
+import java.io.IOException;
+public class Main {​​​​​​
+    public static void main(String[] args) {​​​​​​
+        // ReadInput.readInput();
+        //ReadInput.readInput1();
+try {​​​​​​
+            ReadInput.readInput2();
+}​​​​​​
+        catch (ArithmeticException e) {​​​​​​
+            System.out.println("Denominator is zeo    " + e.getMessage());
+}​​​​​​ catch (NumberFormatException e) {​​​​​​
+            System.out.println("Invalid inputs...    " + e.getMessage());
+}​​​​​​
+        catch (IOException e) {​​​​​​
+            e.printStackTrace();
+}​​​​​​
+
+    }​​​​​​
+}​​​​​​
+
+
+output:
+read two input values 
+10
+0
+Denominator is Zero 
+
+Process finished with exit code 0
+
