@@ -1,0 +1,58 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1636270251710,914,31 launch,200,"Number of samples in transaction : 2, number of failing samples : 0",Thread Group 1-1,,true,,2782,771,1,1,null,0,68,0
+1636270251767,591,31 launch,200,OK,Thread Group 1-1,text,true,,1026,365,1,1,http://18.221.250.120:1080/cgi-bin/welcome.pl?signOff=true,591,0,266
+1636270252362,323,32 launch,200,OK,Thread Group 1-1,text,true,,1756,406,1,1,http://18.221.250.120:1080/cgi-bin/nav.pl?in=home,320,0,0
+1636270252693,937,34 login,200,"Number of samples in transaction : 3, number of failing samples : 0",Thread Group 1-1,,true,,3754,1609,1,1,null,0,3,0
+1636270252693,323,34 login,200,OK,Thread Group 1-1,text,true,,847,600,1,1,http://18.221.250.120:1080/cgi-bin/login.pl,315,0,0
+1636270253017,309,36 login,200,OK,Thread Group 1-1,text,true,,1158,502,1,1,http://18.221.250.120:1080/cgi-bin/login.pl?intro=true,302,0,0
+1636270253327,305,35 login,200,OK,Thread Group 1-1,text,true,,1749,507,1,1,http://18.221.250.120:1080/cgi-bin/nav.pl?page=menu&in=home,302,0,0
+1636270253634,1210,37 Click_flights,200,"Number of samples in transaction : 3, number of failing samples : 0",Thread Group 1-1,,true,,7113,1570,1,1,null,0,2,0
+1636270253634,310,37 Click_flights,200,OK,Thread Group 1-1,text,true,,843,521,1,1,http://18.221.250.120:1080/cgi-bin/welcome.pl?page=search,301,0,0
+1636270253945,580,38 Click_flights,200,OK,Thread Group 1-1,text,true,,1750,524,1,1,http://18.221.250.120:1080/cgi-bin/nav.pl?page=menu&in=flights,578,0,266
+1636270254526,320,39 Click_flights,200,OK,Thread Group 1-1,text,true,,4520,525,1,1,http://18.221.250.120:1080/cgi-bin/reservations.pl?page=welcome,316,0,0
+1636270254847,327,42 continue1,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-1,,true,,2689,845,1,1,null,0,1,0
+1636270254847,327,42 continue1,200,OK,Thread Group 1-1,text,true,,2689,845,1,1,http://18.221.250.120:1080/cgi-bin/reservations.pl,318,0,0
+1636270255176,323,43 continue1,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-1,,true,,2955,738,1,1,null,0,0,0
+1636270255176,323,43 continue1,200,OK,Thread Group 1-1,text,true,,2955,738,1,1,http://18.221.250.120:1080/cgi-bin/reservations.pl,313,0,0
+1636270255500,319,44 continue3,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-1,,true,,2825,875,1,1,null,0,0,0
+1636270255500,319,44 continue3,200,OK,Thread Group 1-1,text,true,,2825,875,1,1,http://18.221.250.120:1080/cgi-bin/reservations.pl,312,0,0
+1636270255820,888,45 logout,200,"Number of samples in transaction : 2, number of failing samples : 0",Thread Group 1-1,,true,,2779,901,1,1,null,0,2,0
+1636270255820,306,45 logout,200,OK,Thread Group 1-1,text,true,,1025,498,1,1,http://18.221.250.120:1080/cgi-bin/welcome.pl?signOff=1,299,0,0
+1636270256127,582,46 logout,200,OK,Thread Group 1-1,text,true,,1754,403,1,1,http://18.221.250.120:1080/cgi-bin/nav.pl?in=home,577,0,262
+1636270256714,1,Debug Sampler,200,OK,Thread Group 1-1,text,true,,582,0,1,1,null,0,0,0
+1636270256715,882,31 launch,200,"Number of samples in transaction : 2, number of failing samples : 0",Thread Group 1-1,,true,,2782,799,1,1,null,0,35,0
+1636270256749,565,31 launch,200,OK,Thread Group 1-1,text,true,,1026,393,1,1,http://18.221.250.120:1080/cgi-bin/welcome.pl?signOff=true,560,0,253
+1636270257315,317,32 launch,200,OK,Thread Group 1-1,text,true,,1756,406,1,1,http://18.221.250.120:1080/cgi-bin/nav.pl?in=home,310,0,0
+1636270257633,946,34 login,200,"Number of samples in transaction : 3, number of failing samples : 0",Thread Group 1-1,,true,,3750,1602,1,1,null,0,3,0
+1636270257633,323,34 login,200,OK,Thread Group 1-1,text,true,,843,601,1,1,http://18.221.250.120:1080/cgi-bin/login.pl,318,0,0
+1636270257957,323,36 login,200,OK,Thread Group 1-1,text,true,,1158,498,1,1,http://18.221.250.120:1080/cgi-bin/login.pl?intro=true,318,0,0
+1636270258281,300,35 login,200,OK,Thread Group 1-1,text,true,,1749,503,1,1,http://18.221.250.120:1080/cgi-bin/nav.pl?page=menu&in=home,294,0,0
+1636270258582,1231,37 Click_flights,200,"Number of samples in transaction : 3, number of failing samples : 0",Thread Group 1-1,,true,,7113,1558,1,1,null,0,4,0
+1636270258583,333,37 Click_flights,200,OK,Thread Group 1-1,text,true,,843,517,1,1,http://18.221.250.120:1080/cgi-bin/welcome.pl?page=search,318,0,0
+1636270258918,577,38 Click_flights,200,OK,Thread Group 1-1,text,true,,1750,520,1,1,http://18.221.250.120:1080/cgi-bin/nav.pl?page=menu&in=flights,570,0,256
+1636270259495,321,39 Click_flights,200,OK,Thread Group 1-1,text,true,,4520,521,1,1,http://18.221.250.120:1080/cgi-bin/reservations.pl?page=welcome,316,0,0
+1636270259817,327,42 continue1,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-1,,true,,2689,841,1,1,null,0,2,0
+1636270259818,327,42 continue1,200,OK,Thread Group 1-1,text,true,,2689,841,1,1,http://18.221.250.120:1080/cgi-bin/reservations.pl,322,0,0
+1636270260146,336,43 continue1,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-1,,true,,2939,734,1,1,null,0,2,0
+1636270260147,336,43 continue1,200,OK,Thread Group 1-1,text,true,,2939,734,1,1,http://18.221.250.120:1080/cgi-bin/reservations.pl,323,0,0
+1636270260484,323,44 continue3,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-1,,true,,2821,871,1,1,null,0,1,0
+1636270260485,323,44 continue3,200,OK,Thread Group 1-1,text,true,,2821,871,1,1,http://18.221.250.120:1080/cgi-bin/reservations.pl,317,0,0
+1636270260809,891,45 logout,200,"Number of samples in transaction : 2, number of failing samples : 0",Thread Group 1-1,,true,,2781,897,1,1,null,0,3,0
+1636270260809,312,45 logout,200,OK,Thread Group 1-1,text,true,,1025,494,1,1,http://18.221.250.120:1080/cgi-bin/welcome.pl?signOff=1,310,0,0
+1636270261123,579,46 logout,200,OK,Thread Group 1-1,text,true,,1756,403,1,1,http://18.221.250.120:1080/cgi-bin/nav.pl?in=home,573,0,260
+1636270261703,1,Debug Sampler,200,OK,Thread Group 1-1,text,true,,583,0,1,1,null,0,0,0
+1636270261707,918,31 launch,200,"Number of samples in transaction : 2, number of failing samples : 0",Thread Group 1-1,,true,,2779,799,1,1,null,0,3,0
+1636270261708,598,31 launch,200,OK,Thread Group 1-1,text,true,,1026,393,1,1,http://18.221.250.120:1080/cgi-bin/welcome.pl?signOff=true,591,0,276
+1636270262308,320,32 launch,200,OK,Thread Group 1-1,text,true,,1753,406,1,1,http://18.221.250.120:1080/cgi-bin/nav.pl?in=home,315,0,0
+1636270262629,322,34 login,200,"Number of samples in transaction : 1, number of failing samples : 1",Thread Group 1-1,,false,,693,599,1,1,null,0,4,0
+1636270262630,322,34 login,200,OK,Thread Group 1-1,text,false,Test failed: text expected to contain /User password was correct/,693,599,1,1,http://18.221.250.120:1080/cgi-bin/login.pl,313,0,0
+1636270262955,918,31 launch,200,"Number of samples in transaction : 2, number of failing samples : 0",Thread Group 1-1,,true,,2781,799,1,1,null,0,3,0
+1636270262956,606,31 launch,200,OK,Thread Group 1-1,text,true,,1026,393,1,1,http://18.221.250.120:1080/cgi-bin/welcome.pl?signOff=true,599,0,273
+1636270263563,312,32 launch,200,OK,Thread Group 1-1,text,true,,1755,406,1,1,http://18.221.250.120:1080/cgi-bin/nav.pl?in=home,307,0,0
+1636270263876,315,34 login,200,"Number of samples in transaction : 1, number of failing samples : 1",Thread Group 1-1,,false,,690,598,1,1,null,0,1,0
+1636270263877,315,34 login,200,OK,Thread Group 1-1,text,false,Test failed: text expected to contain /User password was correct/,690,598,1,1,http://18.221.250.120:1080/cgi-bin/login.pl,310,0,0
+1636270264193,868,31 launch,200,"Number of samples in transaction : 2, number of failing samples : 0",Thread Group 1-1,,true,,2783,799,1,1,null,0,3,0
+1636270264194,562,31 launch,200,OK,Thread Group 1-1,text,true,,1026,393,1,1,http://18.221.250.120:1080/cgi-bin/welcome.pl?signOff=true,556,0,255
+1636270264757,306,32 launch,200,OK,Thread Group 1-1,text,true,,1757,406,1,1,http://18.221.250.120:1080/cgi-bin/nav.pl?in=home,300,0,0
+1636270265064,333,34 login,200,"Number of samples in transaction : 1, number of failing samples : 1",Thread Group 1-1,,false,,693,603,1,1,null,0,2,0
+1636270265065,333,34 login,200,OK,Thread Group 1-1,text,false,Test failed: text expected to contain /User password was correct/,693,603,1,1,http://18.221.250.120:1080/cgi-bin/login.pl,328,0,0
